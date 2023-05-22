@@ -1,0 +1,8 @@
+<mat-card>
+    <mat-card-content>
+        <ng-container *ngFor="let item of data">
+            <app-editable-input [label]="item.label" [value]="item.value" [readonly]="!item.modifiable"
+                (valueChange)="onValueChange(item.label, $event)"></app-editable-input>
+        </ng-container>
+    </mat-card-content>
+</mat-card>
