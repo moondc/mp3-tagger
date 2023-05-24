@@ -19,8 +19,16 @@ router.get('/files_recursively', (req: Request, res: Response) => {
 router.get('/file', (req: Request, res: Response) => {
     const filepath = req.query.path as string;
     const decoded_path = decodeURIComponent(filepath)
-    const metadata = readMusicMetadata(decoded_path);
-    res.status(200).json({ message: `${metadata}` });
+    readMusicMetadata(decoded_path)
+        .then(metadata => {
+            console.log(metadata);
+            return res.status(200).json(metadata);
+        })
+        .catch(err => {
+            console.log(err)
+            return res.status(500).json(err)
+        });
+
 });
 
 export default router;

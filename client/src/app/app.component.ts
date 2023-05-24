@@ -15,7 +15,7 @@ export class AppComponent {
 
   constructor(private backendApi: BackendApiService) {
     //this.backendApi.getAllFiles("C:\\Users\\vboxuser\\Downloads").subscribe(x => console.log(x));
-    this.backendApi.getMetadata("C:\\Users\\vboxuser\\Desktop\\test\\(3 Doors Down) - The Better Life - Kryptonite.mp3").subscribe(x => console.log(x));
+    this.backendApi.getMetadata("C:\\Users\\vboxuser\\Desktop\\test\\(3 Doors Down) - The Better Life - Kryptonite.mp3").subscribe();
 
   }
 }
