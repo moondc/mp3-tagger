@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { TagReaderService } from './services/tag-reader.service';
+import { HttpClient } from '@angular/common/http';
+import { BackendApiService } from './services/backend-api.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +13,9 @@ export class AppComponent {
 
   myImageData: Blob | null = null;
 
-  constructor(private tagReaderService: TagReaderService) {
-    //this.tagReaderService.getThumbnail("C:\\Users\\vboxuser\\Desktop\\a.mp3").subscribe(x => this.myImageData = x)
+  constructor(private backendApi: BackendApiService) {
+    //this.backendApi.getAllFiles("C:\\Users\\vboxuser\\Downloads").subscribe(x => console.log(x));
+    this.backendApi.getMetadata("C:\\Users\\vboxuser\\Desktop\\test\\(3 Doors Down) - The Better Life - Kryptonite.mp3").subscribe(x => console.log(x));
+
   }
 }

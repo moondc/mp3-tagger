@@ -11,6 +11,7 @@ import { FormsModule } from "@angular/forms"
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditableInputComponent } from './components/editable-input/editable-input.component';
 import { BlobImageComponent } from './components/blob-image/blob-image.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BlobImageComponent } from './components/blob-image/blob-image.component
     MatCardModule,
     MatInputModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
