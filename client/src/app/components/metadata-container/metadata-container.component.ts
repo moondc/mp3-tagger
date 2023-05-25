@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { BackendApiService } from 'src/app/services/backend-api.service';
 
 @Component({
@@ -6,27 +6,49 @@ import { BackendApiService } from 'src/app/services/backend-api.service';
   templateUrl: './metadata-container.component.html',
   styleUrls: ['./metadata-container.component.css']
 })
-export class MetadataContainerComponent {
+export class MetadataContainerComponent implements OnChanges {
 
-  file = "C:\\Users\\vboxuser\\Desktop\\test\\(3 Doors Down) - The Better Life - Kryptonite.mp3";
+  @Input() file: any;
 
-  data = [
-    { label: 'Band', value: 'First Value', modifiable: true },
-    { label: 'Album', value: 'Second Value', modifiable: true },
-    { label: 'Song', value: "Third Value", modifiable: true },
-    { label: 'NonModifiable1', value: "NonModifiable Value 1", modifiable: false },
-    { label: 'NonModifiable2', value: "NonModifiable Value 2", modifiable: false },
-  ];
+  band: string = "";
+  album: string = "";
+  song: string = "";
+
+  status_message: string = "";
+  status: 'success' | 'error' = "success";
+
 
   constructor(private backendApi: BackendApiService) { }
 
   ngOnInit() {
-    this.backendApi.getMetadata(this.file).subscribe((metadata: any) => {
-      console.log(metadata);
+    this.backendApi.getMetadata(this.file);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['file']) {
+      this.loadMetadata();
+    }
+  }
+
+  loadMetadata() {
+    this.backendApi.getMetadata(this.file).subscribe(x => {
+      this.band = x.artist;
+      this.album = x.album;
+      this.song = x.title;
     })
   }
 
-  onValueChange(label: string, newValue: string) {
-    console.log(`${label} : ${newValue}`);
+  onBandChange(event: any) {
+    this.status = "success";
+    this.status_message = "Saved!";
+    // todo
+  }
+
+  onAlbumChange(event: any) {
+    // todo
+  }
+
+  onSongChange(event: any) {
+    // todo
   }
 }

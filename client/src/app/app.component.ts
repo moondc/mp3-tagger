@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { TagReaderService } from './services/tag-reader.service';
-import { HttpClient } from '@angular/common/http';
 import { BackendApiService } from './services/backend-api.service';
 
 @Component({
@@ -11,11 +9,12 @@ import { BackendApiService } from './services/backend-api.service';
 export class AppComponent {
   title = 'mp3-tagger';
 
-  myImageData: Blob | null = null;
+  file = "C:\\Users\\vboxuser\\Desktop\\test\\(3 Doors Down) - The Better Life - Kryptonite.mp3";
+  secondfile = "C:\\Users\\vboxuser\\Desktop\\test\\(Linkin Park) - Hybrid Theory - Pushing Me Away.mp3";
 
   constructor(private backendApi: BackendApiService) {
     //this.backendApi.getAllFiles("C:\\Users\\vboxuser\\Downloads").subscribe(x => console.log(x));
-    this.backendApi.getMetadata("C:\\Users\\vboxuser\\Desktop\\test\\(3 Doors Down) - The Better Life - Kryptonite.mp3").subscribe();
-
+    setTimeout(() => { this.file = this.secondfile }, 3000);
   }
+
 }

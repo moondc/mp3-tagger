@@ -1,8 +1,24 @@
 <mat-card>
     <mat-card-content>
-        <ng-container *ngFor="let item of data">
-            <app-editable-input [label]="item.label" [value]="item.value" [readonly]="!item.modifiable"
-                (valueChange)="onValueChange(item.label, $event)"></app-editable-input>
-        </ng-container>
+        <mat-form-field>
+            <mat-label>Band</mat-label>
+            <input matInput [value]="band" [readonly]="false" (blur)="onBandChange($event)">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>Album</mat-label>
+            <input matInput [value]="album" [readonly]="false" (blur)="onAlbumChange($event)">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>Song</mat-label>
+            <input matInput [value]="song" [readonly]="false" (blur)="onSongChange($event)">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="fullWidth">
+            <mat-label>File</mat-label>
+            <input matInput [value]="file" [readonly]="true">
+        </mat-form-field>
+        <app-status-message [status]="status" [message]="status_message" *ngIf="status_message"></app-status-message>
     </mat-card-content>
 </mat-card>

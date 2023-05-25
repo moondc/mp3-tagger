@@ -9,17 +9,17 @@ import { ThumbnailComponent } from './components/thumbnail/thumbnail.component'
 import { MatInputModule } from '@angular/material/input'
 import { FormsModule } from "@angular/forms"
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EditableInputComponent } from './components/editable-input/editable-input.component';
 import { BlobImageComponent } from './components/blob-image/blob-image.component';
 import { HttpClientModule } from '@angular/common/http';
+import { StatusMessageComponent } from './components/status-message/status-message.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MetadataContainerComponent,
     ThumbnailComponent,
-    EditableInputComponent,
-    BlobImageComponent
+    BlobImageComponent,
+    StatusMessageComponent
   ],
   imports: [
     BrowserModule,
