@@ -12,4 +12,17 @@ function readMusicMetadata(filePath: string): Promise<NodeID3.Tags> {
     });
 }
 
-export { readMusicMetadata }
+
+function writeMusicMetadata(filepath: string, tags: any) {
+    return new Promise((resolve, reject) => {
+        NodeID3.write(tags, filepath, function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve('Successfully wrote ID3 tags to file.');
+            }
+        });
+    });
+}
+
+export { readMusicMetadata, writeMusicMetadata }

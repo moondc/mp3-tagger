@@ -1,6 +1,13 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { BackendApiService } from 'src/app/services/backend-api.service';
 
+interface Tag {
+  album?: string;
+  title?: string;
+  artist?: string;
+  image?: string;
+}
+
 @Component({
   selector: 'app-metadata-container',
   templateUrl: './metadata-container.component.html',
@@ -16,6 +23,8 @@ export class MetadataContainerComponent implements OnChanges {
 
   status_message: string = "";
   status: 'success' | 'error' = "success";
+
+
 
 
   constructor(private backendApi: BackendApiService) { }
@@ -38,17 +47,29 @@ export class MetadataContainerComponent implements OnChanges {
     })
   }
 
+  private obs = {
+    next: (x: any) => {
+      this.status_message = "Saved!";
+      this.status = "success";
+    },
+    error: (err: any) => {
+      this.status_message = "Error";
+      this.status = "error";
+    },
+  }
+
   onBandChange(event: any) {
-    this.status = "success";
-    this.status_message = "Saved!";
-    // todo
+    const tag: Tag = { artist: event.target.value }
+    this.backendApi.writeMetadata(this.file, tag).subscribe(this.obs);
   }
 
   onAlbumChange(event: any) {
-    // todo
+    const tag: Tag = { album: event.target.value }
+    this.backendApi.writeMetadata(this.file, tag).subscribe(this.obs);
   }
 
   onSongChange(event: any) {
-    // todo
+    const tag: Tag = { title: event.target.value }
+    this.backendApi.writeMetadata(this.file, tag).subscribe(this.obs);
   }
 }
