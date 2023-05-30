@@ -20,6 +20,7 @@ export class MetadataContainerComponent implements OnChanges {
   band: string = "";
   album: string = "";
   song: string = "";
+  thumbnail: any = null;
 
   status_message: string = "";
   status: 'success' | 'error' = "success";
@@ -40,11 +41,14 @@ export class MetadataContainerComponent implements OnChanges {
   }
 
   loadMetadata() {
-    this.backendApi.getMetadata(this.file).subscribe(x => {
-      this.band = x.artist;
-      this.album = x.album;
-      this.song = x.title;
-    })
+    if (this.file) {
+      this.backendApi.getMetadata(this.file).subscribe(x => {
+        this.band = x.artist;
+        this.album = x.album;
+        this.song = x.title;
+        this.thumbnail = x.image;
+      })
+    }
   }
 
   private obs = {
@@ -59,17 +63,23 @@ export class MetadataContainerComponent implements OnChanges {
   }
 
   onBandChange(event: any) {
-    const tag: Tag = { artist: event.target.value }
-    this.backendApi.writeMetadata(this.file, tag).subscribe(this.obs);
+    if (this.file) {
+      const tag: Tag = { artist: event.target.value }
+      this.backendApi.writeMetadata(this.file, tag).subscribe(this.obs);
+    }
   }
 
   onAlbumChange(event: any) {
-    const tag: Tag = { album: event.target.value }
-    this.backendApi.writeMetadata(this.file, tag).subscribe(this.obs);
+    if (this.file) {
+      const tag: Tag = { album: event.target.value }
+      this.backendApi.writeMetadata(this.file, tag).subscribe(this.obs);
+    }
   }
 
   onSongChange(event: any) {
-    const tag: Tag = { title: event.target.value }
-    this.backendApi.writeMetadata(this.file, tag).subscribe(this.obs);
+    if (this.file) {
+      const tag: Tag = { title: event.target.value }
+      this.backendApi.writeMetadata(this.file, tag).subscribe(this.obs);
+    }
   }
 }

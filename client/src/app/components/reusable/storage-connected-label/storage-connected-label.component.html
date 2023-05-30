@@ -1,0 +1,5 @@
+<div><mat-form-field appearance="fill">
+        <mat-label>{{ prop | uncamelCaser}}</mat-label>
+        <input matInput [(ngModel)]="textboxValue" (ngModelChange)="updateLocalStorage($event)">
+    </mat-form-field>
+</div>

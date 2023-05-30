@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+
+.box {
+    flex: 1;
+    margin-left: 10px;
+    /* Optional, adds some space between boxes */
+}

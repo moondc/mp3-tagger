@@ -1,0 +1,36 @@
+<div>
+    <mat-card>
+        <mat-card-content>
+            <div class="container">
+                <div class="box">
+                    <mat-form-field class="fullWidth">
+                        <mat-label>Band</mat-label>
+                        <input matInput [value]="band" [readonly]="false" (blur)="onBandChange($event)">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="fullWidth">
+                        <mat-label>Album</mat-label>
+                        <input matInput [value]="album" [readonly]="false" (blur)="onAlbumChange($event)">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="fullWidth">
+                        <mat-label>Song</mat-label>
+                        <input matInput [value]="song" [readonly]="false" (blur)="onSongChange($event)">
+                    </mat-form-field>
+                </div>
+                <div class="box">
+                    <app-thumbnail [data]="thumbnail"></app-thumbnail>
+                </div>
+            </div>
+            <br>
+            <mat-form-field class="fullWidth">
+                <mat-label>File</mat-label>
+                <input matInput [value]="file" [readonly]="true">
+            </mat-form-field>
+            <app-status-message [status]="status" [message]="status_message"
+                *ngIf="status_message"></app-status-message>
+        </mat-card-content>
+    </mat-card>
+
+
+</div>
