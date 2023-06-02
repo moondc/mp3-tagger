@@ -3,8 +3,8 @@
         <app-metadata-container [file]="file"></app-metadata-container>
     </mat-card-content>
     <div class="padding">
-        <app-file-picker></app-file-picker>
-        <app-storage-connected-label prop="baseMusicDirectory"></app-storage-connected-label>
+        <app-file-picker (fileSelected)="onFileSelected($event)"></app-file-picker>
+        <app-storage-connected-label prop=" baseMusicDirectory"></app-storage-connected-label>
         <app-storage-connected-label prop="namingPattern"></app-storage-connected-label>
     </div>
 </mat-card>

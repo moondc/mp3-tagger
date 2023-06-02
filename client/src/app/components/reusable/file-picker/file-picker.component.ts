@@ -12,8 +12,11 @@ export class FilePickerComponent {
   onFileSelected(event: any) {
     if (event.target.files.length > 0) {
       const file: File = event.target.files[0];
-      console.log(event.target.files);
       this.fileSelected.emit(file);
     }
+  }
+
+  localStorageValueExists(): boolean {
+    return localStorage.getItem('baseMusicDirectory') !== null;
   }
 }

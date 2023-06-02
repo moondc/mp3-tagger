@@ -15,7 +15,7 @@ interface Tag {
 })
 export class MetadataContainerComponent implements OnChanges {
 
-  @Input() file: any;
+  @Input() file!: string;
 
   band: string = "";
   album: string = "";

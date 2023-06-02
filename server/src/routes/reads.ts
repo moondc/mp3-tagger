@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { getFilesRecursively } from './../helpers/filesystem';
+import { getFilesRecursively, findFileInDirectory } from './../helpers/filesystem';
 import { readMusicMetadata } from '../helpers/metadata';
 
 const router: Router = Router();
@@ -28,7 +28,18 @@ router.get('/file', (req: Request, res: Response) => {
             console.log(err)
             return res.status(500).json(err)
         });
-
 });
+
+router.get('/findFile', (req: Request, res: Response) => {
+    const fileName = req.query.name as string;
+    const decodedName = decodeURIComponent(fileName)
+    const directory = req.query.dir as string;
+    const decodedDir = decodeURIComponent(directory);
+    const result = findFileInDirectory(decodedDir, decodedName);
+    console.log({ result })
+    return res.status(200).json({ fullFilePath: result });
+});
+
+
 
 export default router;

@@ -19,8 +19,14 @@ export class BackendApiService {
     return this.httpClient.get(this.base_url + "/files_recursively?path=" + encodeURIComponent(filepath))
   }
 
+  findFile(filename: string, directory: string): Observable<any> {
+    const url = this.base_url + "/findFile";
+    const queryParams = `?name=${encodeURIComponent(filename)}&dir=${encodeURIComponent(directory)}`;
+    return this.httpClient.get(url + queryParams)
+  }
+
   writeMetadata(filepath: string, tags: any): Observable<any> {
     const url = this.base_url + "/modifyTags?path=" + encodeURIComponent(filepath);
-    return this.httpClient.post(url, tags).pipe(tap(x => console.log(x)))
+    return this.httpClient.post(url, tags);
   }
 }
