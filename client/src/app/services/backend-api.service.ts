@@ -12,7 +12,7 @@ export class BackendApiService {
   constructor(private httpClient: HttpClient) { }
 
   getMetadata(filepath: string): Observable<any> {
-    return this.httpClient.get(this.base_url + "/file?path=" + encodeURIComponent(filepath)).pipe(tap(x => console.log(x)))
+    return this.httpClient.get(this.base_url + "/file?path=" + encodeURIComponent(filepath));
   }
 
   getAllFiles(filepath: string): Observable<any> {
@@ -28,5 +28,10 @@ export class BackendApiService {
   writeMetadata(filepath: string, tags: any): Observable<any> {
     const url = this.base_url + "/modifyTags?path=" + encodeURIComponent(filepath);
     return this.httpClient.post(url, tags);
+  }
+
+  renameFile(oldFile: string, pattern: string): Observable<boolean> {
+    const url = this.base_url + "/renameFile";
+    return this.httpClient.post<boolean>(url, { currentFile: oldFile, pattern: pattern });
   }
 }

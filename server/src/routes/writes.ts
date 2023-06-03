@@ -1,5 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { writeMusicMetadata, readMusicMetadata } from '../helpers/metadata';
+import { renameFileSync } from '../helpers/filesystem';
+import { getNewName } from '../helpers/fileNamer';
 
 
 const router: Router = Router();
@@ -30,6 +32,17 @@ router.post('/modifyTags', (req: Request, res: Response) => {
                 return res.status(500).json(err)
             });
     });
+});
+
+router.post('/renameFile', async (req: Request, res: Response) => {
+    const currentFile = req.body.currentFile;
+    const pattern = req.body.pattern;
+    const newFileName = await getNewName(currentFile, pattern);
+    const result = renameFileSync(currentFile, newFileName)
+    if (result) {
+        return res.status(200).json({ result: true, newFile: newFileName });
+    }
+    return res.status(200).json({ result: false });
 });
 
 

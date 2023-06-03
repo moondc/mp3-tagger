@@ -15,6 +15,9 @@ export class ThumbnailComponent {
       let objectURL = URL.createObjectURL(blob);
       this.image = this.sanitizer.bypassSecurityTrustUrl(objectURL);
     }
+    else {
+      this.image = null;
+    }
   }
 
   image: any;

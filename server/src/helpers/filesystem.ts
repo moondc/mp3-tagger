@@ -37,4 +37,14 @@ const findFileInDirectory = (dir: string, fileName: string): string | null => {
     return null; // return null if the file was not found
 };
 
-export { getFilesRecursively, findFileInDirectory };
+function renameFileSync(oldPath: string, newPath: string): boolean {
+    try {
+        fs.renameSync(oldPath, newPath);
+        return true
+    } catch (error) {
+        console.error(`Error while renaming file: ${error}`);
+        return false;
+    }
+}
+
+export { getFilesRecursively, findFileInDirectory, renameFileSync };
