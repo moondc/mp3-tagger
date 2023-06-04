@@ -34,4 +34,9 @@ export class BackendApiService {
     const url = this.base_url + "/renameFile";
     return this.httpClient.post<boolean>(url, { currentFile: oldFile, pattern: pattern });
   }
+
+  getMissingTag(dir: string): Observable<string> {
+    const url = this.base_url + "/findMissingTags?dir=" + dir;
+    return this.httpClient.get<string>(url);
+  }
 }

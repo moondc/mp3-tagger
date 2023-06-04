@@ -43,9 +43,9 @@ export class MetadataContainerComponent implements OnChanges {
   loadMetadata() {
     if (this.file) {
       this.backendApi.getMetadata(this.file).subscribe(x => {
-        this.band = x.artist;
-        this.album = x.album;
-        this.song = x.title;
+        this.band = x.artist ? x.artist : null;
+        this.album = x.album ? x.album : null;
+        this.song = x.title ? x.title : null;
         this.thumbnail = x.image;
       })
     }
@@ -80,6 +80,14 @@ export class MetadataContainerComponent implements OnChanges {
     if (this.file) {
       const tag: Tag = { title: event.target.value }
       this.backendApi.writeMetadata(this.file, tag).subscribe(this.obs);
+    }
+  }
+
+  getProps() {
+    return {
+      title: this.song,
+      artist: this.band,
+      album: this.album
     }
   }
 }

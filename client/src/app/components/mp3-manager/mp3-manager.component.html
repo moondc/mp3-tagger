@@ -9,6 +9,9 @@
             prop="namingPattern"></app-storage-connected-label>
         <app-button [disabled]="renameFileDisabled()" [buttonText]="'Rename File'"
             (buttonClick)="renameFile()"></app-button>
+        <br>
+        <app-button [disabled]="findMissingTagsDisabled()" [buttonText]="'Find Missing Tags'"
+            (buttonClick)="findMissingTag()"></app-button>
         <app-status-message [status]="status" [message]="status_message" *ngIf="status_message"></app-status-message>
     </div>
 </mat-card>

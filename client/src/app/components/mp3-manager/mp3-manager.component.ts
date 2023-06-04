@@ -24,6 +24,12 @@ export class Mp3ManagerComponent {
     return true;
   }
 
+  findMissingTagsDisabled() {
+    if (localStorage.getItem('baseMusicDirectory'))
+      return false;
+    return true;
+  }
+
   renameFile() {
     const obs = {
       next: (res: any) => {
@@ -39,5 +45,20 @@ export class Mp3ManagerComponent {
       }
     }
     this.backendApi.renameFile(this.file, localStorage.getItem('namingPattern') as string).subscribe(obs);
+  }
+
+  findMissingTag() {
+    const obs = {
+      next: (result: any) => {
+        if (!result.fullFilePath) {
+          this.status = 'success';
+          this.status_message = 'no files with missing tags'
+        }
+        console.log(result);
+        this.file = result.fullFilePath
+      }
+    }
+    const musicDir = localStorage.getItem('baseMusicDirectory') as string;
+    this.backendApi.getMissingTag(musicDir).subscribe(obs)
   }
 }

@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { readMusicMetadata } from './metadata';
 
 function getFilesRecursively(directory: string): string[] {
     let results: string[] = [];
@@ -47,4 +48,27 @@ function renameFileSync(oldPath: string, newPath: string): boolean {
     }
 }
 
-export { getFilesRecursively, findFileInDirectory, renameFileSync };
+async function findFileWithMissingTag(dir: string): Promise<string> {
+    const files: string[] = getFilesRecursively(dir);
+    for (let i = 0; i < files.length; i++) {
+        const filepath = files[i];
+        const metadata: any = await readMusicMetadata(filepath);
+        if (isNullOrEmpty(metadata.title)) {
+            return filepath;
+        }
+        if (isNullOrEmpty(metadata.artist)) {
+            return filepath;
+        }
+        if (isNullOrEmpty(metadata.album)) {
+            return filepath;
+        }
+    }
+    return '';
+}
+
+function isNullOrEmpty(input: string) {
+    const result = input === null || input === '' || input === undefined;
+    return result;
+}
+
+export { getFilesRecursively, findFileInDirectory, renameFileSync, findFileWithMissingTag };
