@@ -4,7 +4,7 @@
     </mat-card-content>
     <div class="padding">
         <app-file-picker (fileSelected)="onFileSelected($event)"></app-file-picker>
-        <app-storage-connected-label prop=" baseMusicDirectory"></app-storage-connected-label>
+        <app-storage-connected-label prop="baseMusicDirectory"></app-storage-connected-label>
         <app-storage-connected-label [tooltipText]="'%A = Album, %B = Band, %S = Song'"
             prop="namingPattern"></app-storage-connected-label>
         <app-button [disabled]="renameFileDisabled()" [buttonText]="'Rename File'"
