@@ -19,8 +19,9 @@ Make sure your directories only contain music files and not hidden system files 
 ### Known Bugs
 1. If a song is loaded in and a new song is loaded on top and that new song does not have a metadata, the ui will display the first loaded metadata for that field.
 1. Not a bug, but horrible efficiency: running Rename All Files will rename all files even if they already match the new filename
-1. Not a bug, but bad efficiency: Find Missing Tags will reread all files so large libraries that have multiple missing tags towards the end will require scanning more than necessary scanning
+1. Not a bug, but bad efficiency: Find Missing Tags will reread all files so large libraries that have multiple missing tags towards the end will require scanning more than necessary
 1. Logging is pretty garbage and not consistant.
 
 ### Future work ideas
 1. Allow modification of thumbnails.
+1. Clean up the ui
