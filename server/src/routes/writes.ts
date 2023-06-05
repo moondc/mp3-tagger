@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { writeMusicMetadata, readMusicMetadata } from '../helpers/metadata';
-import { renameFileSync } from '../helpers/filesystem';
+import { renameFileSync, getFilesRecursively } from '../helpers/filesystem';
 import { getNewName } from '../helpers/filenamer';
 
 
@@ -40,6 +40,26 @@ router.post('/renameFile', async (req: Request, res: Response) => {
         return res.status(200).json({ result: true, newFile: newFileName });
     }
     return res.status(200).json({ result: false });
+});
+
+router.post('/renameAllFiles', async (req: Request, res: Response) => {
+    const dir = req.body.dir;
+    const pattern = req.body.pattern;
+
+    const files = getFilesRecursively(dir);
+
+    for (let i = 0; i < files.length; i++) {
+        const newFileName = await getNewName(files[i], pattern);
+        try {
+            const result = renameFileSync(files[i], newFileName)
+            if (!result) throw new Error("File not renamed: " + newFileName);
+        }
+        catch (ex) {
+            return res.status(500).json({ error: ex });
+        }
+    }
+
+    return res.status(200).json({ result: true });
 });
 
 

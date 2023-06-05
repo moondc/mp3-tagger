@@ -24,10 +24,34 @@ export class Mp3ManagerComponent {
     return true;
   }
 
+  renameAllFilesDisabled() {
+    if (localStorage.getItem('namingPattern') && localStorage.getItem('baseMusicDirectory'))
+      return false;
+    return true;
+  }
+
   findMissingTagsDisabled() {
     if (localStorage.getItem('baseMusicDirectory'))
       return false;
     return true;
+  }
+
+  renameAllFiles() {
+    const obs = {
+      next: (res: any) => {
+        if (res.result) {
+          this.status = "success";
+          this.status_message = "Files Renamed!";
+          this.file = res.newFile
+        }
+      },
+      error: (ex: any) => {
+        this.status = "error";
+        console.log(ex);
+        this.status_message = ex.error.toString();
+      }
+    }
+    this.backendApi.renameAllFiles(localStorage.getItem('namingPattern') as string, localStorage.getItem('baseMusicDirectory') as string).subscribe(obs);
   }
 
   renameFile() {

@@ -12,6 +12,8 @@ async function getNewName(filePath: string, pattern: string) {
     result = result.replace(/%S/g, title!);
     result = result.replace(/%A/g, album!);
 
+    result = result.replace(/[\/\\:*?"<>|]/g, '_');
+
     return path.join(dir, result + ext);
 }
 
