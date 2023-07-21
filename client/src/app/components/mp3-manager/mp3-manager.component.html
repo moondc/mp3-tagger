@@ -4,11 +4,12 @@
     </mat-card-content>
     <div class="padding">
         <app-file-picker (fileSelected)="onFileSelected($event)"></app-file-picker>
+        <app-button [disabled]="renameFileDisabled()" [buttonText]="'Rename Current File'"
+            (buttonClick)="renameFile()"></app-button>
         <app-storage-connected-label prop="baseMusicDirectory"></app-storage-connected-label>
         <app-storage-connected-label [tooltipText]="'%A = Album, %B = Band, %S = Song'"
             prop="namingPattern"></app-storage-connected-label>
-        <app-button [disabled]="renameFileDisabled()" [buttonText]="'Rename Current File'"
-            (buttonClick)="renameFile()"></app-button>
+
         <app-button [disabled]="renameAllFilesDisabled()" [buttonText]="'Rename All Files'"
             (buttonClick)="renameAllFiles()"></app-button>
         <br>
